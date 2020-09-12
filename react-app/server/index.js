@@ -1,6 +1,12 @@
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
+const nosniff = require("dont-sniff-mimetype");
+
 const app = express();
+
+app.use(cors());
+app.use(nosniff());
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("public"));
@@ -11,4 +17,5 @@ app.use((req, res, next) => {
 
 app.listen(5000, () => {
 	console.log("server started on port 5000");
+	console.log("CORS-enabled web server listening on port 5000");
 });
